@@ -1,0 +1,198 @@
+# ==============================================================
+# PureArena 纯净竞技场 主配置文件
+# 编码：UTF-8
+# 除特殊说明外，所有配置修改后执行 /purearena reload 生效，
+# SQLite 数据库固定保存每日击杀统计，数据库文件为插件目录下的 stats.db。
+# ==============================================================
+
+# 击退设置。
+knockback:
+  # 是否启用自定义击退。
+  # 可选值：true / false。默认值：true。
+  # false 时使用原版击退。支持 reload。
+  enabled: true
+
+  # 水平击退力度倍率。
+  # 取值范围：0.0 - 10.0，超出范围会被自动修正并在控制台警告。
+  # 默认值：1.0（约等于原版力度）。支持 reload。
+  horizontal: 1.0
+
+  # 垂直击退力度倍率。
+  # 取值范围：0.0 - 10.0，超出范围会被自动修正并在控制台警告。
+  # 默认值：1.0（约等于原版力度）。支持 reload。
+  vertical: 1.0
+
+  # 垂直击退速度上限，防止玩家被击飞过高。
+  # 取值范围：0.0 - 4.0。默认值：0.45。支持 reload。
+  vertical-limit: 0.45
+
+# 返回大厅按钮。
+back_button:
+  # 设置槽位 (1-9) [设置0则不显示该按钮]
+  # 默认值：9（快捷栏最后一格）。支持 reload，重载后自动刷新在线玩家的按钮。
+  slot: 9
+
+  # 物品材质
+  # 可选值：任意有效 Bukkit Material 名称。无效时回退为 SLIME_BALL 并警告。
+  # 默认值：SLIME_BALL。支持 reload。
+  material: SLIME_BALL
+
+  # 自定义模型数据
+  # 取值范围：>= 0 的整数，0 表示不设置。默认值：0。支持 reload。
+  custom_model_data: 0
+
+  # 按钮物品名称。支持 MiniMessage、& 和 § 颜色代码。
+  # 默认值见下。支持 reload。
+  name: '&a返回大厅 &7(左键/右键)'
+
+  # 按钮物品说明。支持 MiniMessage、& 和 § 颜色代码。
+  # 默认值见下。支持 reload。
+  lore:
+  - '&7左键或右键点击，返回大厅子服。'
+  - '&e该物品无法丢弃或移动。'
+
+  # 点击后要连接的 BungeeCord/Velocity 子服名称。
+  # 必须与代理端 config 中注册的服务器名一致。
+  # 默认值：server。支持 reload。
+  target-server: server
+
+  # 按钮点击冷却（秒），防止重复提交传送请求。
+  # 取值范围：>= 0。默认值：3。支持 reload。
+  cooldown-seconds: 3
+
+# 竞技场设置。
+arena:
+  # 进入竞技场（加入服务器、死亡复活后）传送到的出生点。
+  spawn:
+    # 是否启用出生点传送。
+    # 可选值：true / false。默认值：false（未配置坐标前不要开启）。支持 reload。
+    enabled: false
+
+    # 出生点所在世界名称。世界不存在时跳过传送并在控制台警告。
+    # 默认值：world。支持 reload。
+    world: world
+
+    # 出生点坐标与朝向。yaw 为水平朝向角，pitch 为俯仰角。
+    # 默认值：x 0.5 / y 100.0 / z 0.5 / yaw 0.0 / pitch 0.0。支持 reload。
+    x: 0.5
+    y: 100.0
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+
+# 血量恢复。
+heal:
+  # 点击返回大厅按钮离开前，是否恢复满血、满饱食度并熄灭火焰。
+  # 这样竞技场服保存的存档是健康状态，下次进入不会残留低血量。
+  # 可选值：true / false。默认值：true。支持 reload。
+  on-return: true
+
+
+# 物资清理。
+inventory:
+  # 点击返回大厅按钮离开前，是否清空玩家背包（含盔甲与副手）。
+  # 竞技场物资不会带回，下次进入竞技场为全新状态。
+  # 可选值：true / false。默认值：true。支持 reload。
+  # 注意：清空无法恢复，如需保留玩家物资请改为 false。
+  clear-on-return: true
+
+# CPS（每秒点击数）检测。
+cps:
+  # CPS 超过阈值时是否自动踢出服务器。
+  # 可选值：true / false。默认值：true。支持 reload。
+  kick-enabled: true
+
+  # 踢出阈值：CPS 高于该值（不含等于）时踢出。
+  # 取值范围：>= 1。默认值：15。支持 reload。
+  kick-threshold: 15
+
+  # 动作栏 CPS 显示。
+  actionbar:
+    # 是否在动作栏实时显示 CPS（每次点击刷新，停止挥动 1 秒后自动清除）。
+    # 可选值：true / false。默认值：true。支持 reload。
+    enabled: true
+
+    # 动作栏显示格式。支持 & 和 § 颜色代码以及 MiniMessage。
+    # 可用占位符：%cps% 当前每秒点击数，%max_cps% 当前连续攻击动作的最高 CPS（停止 1 秒后清零）。
+    format: '&fCPS: &a%cps% &7| 最高: &c%max_cps%'
+
+# 基础反作弊。
+anti-cheat:
+  # 是否启用竞技场基础反作弊。默认值：true。支持 reload。
+  enabled: true
+
+  # 飞行检测：禁止未开启飞行权限的生存/冒险玩家飞行。
+  # 创造、旁观和拥有 purearena.anticheat.bypass 权限的玩家不检测。
+  flight-check:
+    # 可选值：true / false。默认值：true。支持 reload。
+    enabled: true
+
+  # 近战攻击距离检测，用于拦截常见长臂猿/Reach。
+  reach-check:
+    # 可选值：true / false。默认值：true。支持 reload。
+    enabled: true
+    # 攻击者眼部到目标碰撞箱的最大距离（格）。取值范围：3.0 - 8.0。
+    # 默认值：3.6。过小可能误判延迟或击退中的玩家，支持 reload。
+    max-distance: 3.6
+    # 连续超距次数达到该值后踢出。取值范围：1 - 20。默认值：3。支持 reload。
+    violations-to-kick: 3
+
+# 死亡复活。
+respawn:
+  # 玩家死亡后是否自动复活（跳过死亡界面），复活后会被传送到竞技场出生点。
+  # 可选值：true / false。默认值：true。支持 reload。
+  auto: true
+
+  # 死亡后延迟多少 tick 自动复活（20 tick = 1 秒）。
+  # 取值范围：>= 1，小于 1 会被自动修正为 1。默认值：20。支持 reload。
+  delay-ticks: 20
+
+# 右侧计分板。
+scoreboard:
+  # 是否启用侧边计分板。
+  # 可选值：true / false。默认值：true。支持 reload。
+  enabled: true
+
+  # 计分板标题。支持 & 和 § 颜色代码以及 MiniMessage。
+  title: '&a&l纯净竞技场'
+
+  # 计分板刷新间隔（tick）。
+  # 取值范围：>= 1，小于 1 会被自动修正为 1。默认值：20。支持 reload。
+  update-interval-ticks: 20
+
+  # %date% 占位符的日期格式（Java DateTimeFormatter 语法）。
+  # 无效格式会回退为 yyyy/MM/dd 并警告。默认值：yyyy/MM/dd。支持 reload。
+  date-format: 'yyyy/MM/dd'
+
+  # 还没有玩家击杀时 %mvp_name% 显示的文本。
+  # 默认值：暂无。支持 reload。
+  no-mvp-name: '暂无'
+
+  # 计分板统计是否只显示当天数据。
+  # 可选值：true / false。默认值：true。支持 reload。
+  # true 时跨天后（服务器本地时区 0 点）第一次刷新会清空
+  # 全部击杀、MVP 与淘汰统计，从零开始记录新一天的数据。
+  reset-daily: true
+
+  # 是否隐藏计分板每行右侧的红色分数数字。
+  # 可选值：true / false。默认值：true。支持 reload。
+  # 需要 Minecraft 1.20.4 及以上客户端与服务端。
+  hide-numbers: true
+
+  # 计分板内容，从上到下最多 15 行。支持 & 和 § 颜色代码。
+  # 可用占位符：
+  #   %date%          当前日期
+  #   %mvp_name%      当前击杀数最高的玩家名
+  #   %mvp_amount%    今日全服累计击杀数量
+  #   %remain_player% 剩余存活玩家数
+  #   %kill_amount%   今日全服累计击杀数量（与 %mvp_amount% 相同）
+  #   %cps%           查看者当前每秒点击数（默认显示在动作栏，也可加到此处）
+  #   %max_cps%       查看者本次会话的最高 CPS
+  lines:
+  - ' &7%date% 单人模式'
+  - ''
+  - ' &fMVP: &6%mvp_name%&f(&c%mvp_amount%&f)'
+  - ' &f剩余玩家: &b%remain_player%'
+  - ''
+  - ' &f击杀: &6%kill_amount%'
+  - ''

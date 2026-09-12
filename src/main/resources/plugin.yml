@@ -1,0 +1,28 @@
+name: PureArena
+main: com.mcxyd.purearena.PureArenaPlugin
+version: ${version}
+api-version: '1.21'
+author: xWtree
+website: https://github.com/mcxyd
+description: 纯净竞技场子服插件，提供可配置击退、返回大厅按钮、MVP 计分板与死亡自动回大厅。
+folia-supported: true
+
+libraries:
+  - org.xerial:sqlite-jdbc:3.49.1.0
+
+commands:
+  purearena:
+    description: 纯净竞技场主指令
+    aliases: [pa]
+    usage: /purearena help
+
+permissions:
+  purearena.use:
+    description: 允许使用 /purearena help 等基础指令
+    default: true
+  purearena.admin:
+    description: 允许使用 /purearena reload 等管理指令
+    default: op
+  purearena.anticheat.bypass:
+    description: 绕过 PureArena 基础反作弊检测
+    default: op

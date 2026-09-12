@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.mcxyd'
+version = '2.4.0'
+
+// Windows 中文路径会破坏 Gradle 测试 worker 的类路径编码，构建输出放到 ASCII 路径
+layout.buildDirectory = new File('C:/PureArenaBuild')
+
+repositories {
+    // 优先使用本地缓存，其次 PaperMC 官方仓库
+    mavenLocal()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    mavenCentral()
+}
+
+dependencies {
+    // Paper API 只参与编译，不打进成品 JAR
+    compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT'
+    compileOnly 'org.xerial:sqlite-jdbc:3.49.1.0'
+
+    testImplementation 'io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT'
+    testImplementation 'org.xerial:sqlite-jdbc:3.49.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    filteringCharset = 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand version: project.version
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    archiveBaseName = 'PureArena'
+}
+
+// Windows 中文路径下测试 worker 的类路径编码修正
+tasks.withType(Test).configureEach {
+    jvmArgs '-Dfile.encoding=UTF-8', '-Dsun.jnu.encoding=UTF-8'
+}

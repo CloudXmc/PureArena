@@ -1,0 +1,12 @@
+.gradle/
+build/
+target/
+out/
+.idea/
+*.iml
+*.log
+
+# 运行时数据
+stats.db
+stats.db-*
+

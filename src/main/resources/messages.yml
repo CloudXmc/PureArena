@@ -1,0 +1,56 @@
+# ==============================================================
+# PureArena 纯净竞技场 消息文件
+# 编码：UTF-8
+# 所有消息支持 MiniMessage、& 和 § 颜色代码。
+# 修改后执行 /purearena reload 生效。
+# ==============================================================
+
+# 插件所有聊天消息使用的统一前缀。
+prefix: "<dark_gray>[</dark_gray><gradient:#FFD700:#FF6B6B>纯净竞技场</gradient><dark_gray>]</dark_gray> "
+
+# 传送相关。
+connect:
+  # 点击返回大厅按钮后的提示。{server} 为目标子服名称。
+  sending: "<green>正在把你传送到大厅…</green>"
+  # 冷却中重复点击的提示。{seconds} 为剩余秒数。
+  cooldown: "<yellow>传送请求已发送，请稍候 {seconds} 秒后再试。</yellow>"
+
+# 竞技场相关。
+arena:
+  # 出生点传送失败的提示。
+  spawn-failed: "<red>传送到竞技场出生点失败，请联系管理员。</red>"
+
+# MVP 相关。
+mvp:
+  # 玩家击杀数严格超过当前最高值时向全服广播。{player} 为玩家名，{amount} 为今日全服累计击杀数。
+  new: "<yellow>玩家 <gold>{player}</gold> 成为了新的 MVP！今日累计击杀：<red>{amount}</red></yellow>"
+
+# CPS 检测相关。
+cps:
+  # CPS 超过阈值被踢出时的提示（显示在断开连接界面）。
+  kick-message: "<red>点击速度异常（CPS 过高），已被移出服务器。</red>"
+
+# 基础反作弊消息。
+anti-cheat:
+  # 未授权飞行被关闭时的提示。
+  flight-blocked: "<red>竞技场禁止飞行。</red>"
+  # 连续超出近战距离后踢出时的提示。
+  reach-kick: "<red>检测到异常攻击距离，已被移出服务器。</red>"
+
+# 指令相关。
+command:
+  no-permission: "<red>你没有权限使用该指令。</red>"
+  unknown: "<red>未知指令，请输入 <yellow>/purearena help</yellow> 查看帮助。</red>"
+  reload-success: "<green>配置已重载。</green>"
+  reload-failed: "<red>配置重载失败，已继续使用原配置：{reason}</red>"
+
+# 帮助信息。
+help:
+  header: "<gradient:#55FFAA:#55AAFF>———— 纯净竞技场 帮助 ————</gradient>"
+  # 普通玩家可见的帮助条目。
+  player:
+  - "<yellow>/purearena help</yellow> <gray>- 查看本帮助。</gray>"
+  # 仅管理员（purearena.admin）可见的帮助条目。
+  admin:
+  - "<yellow>/purearena reload</yellow> <gray>- 重载配置与消息文件。重载不会影响正在进行的对局数据。</gray>"
+  footer: "<dark_gray>—————————————————</dark_gray>"
