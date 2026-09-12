@@ -85,3 +85,7 @@ gradle clean test build
 ## 许可证
 
 GPL-3.0，详见 [LICENSE](LICENSE)。
+
+## 致谢
+
+本项目基础代码由 Claude Code 协助编写，后续功能、配置、测试和发布内容在此基础上持续维护。
